@@ -1,12 +1,15 @@
 define-command -params 1.. \
     -docstring %{
-        git [<arguments>]: asynchronous git helper
+        git-async [<arguments>]: asynchronous git helper
         Available commands:
             update-diff
+            update-diff-via-git
+                - uses `git diff` instead of plain `diff`
     } -shell-script-candidates %{
     if [ $kak_token_to_complete -eq 0 ]; then
         printf %s\\n \
             update-diff \
+            update-diff-via-git \
         ;
     fi
   } \
@@ -67,7 +70,7 @@ define-command -params 1.. \
     update_diff() {
         (
             cd_bufdir
-            diff_buffer_against_index -U0 | perl -e '
+            diff_buffer_against_index${1} -U0 | perl -e '
             use utf8;
             $flags = $ENV{"kak_timestamp"};
             $add_char = $ENV{"kak_opt_git_diff_add_char"};
@@ -126,6 +129,7 @@ define-command -params 1.. \
 
     case "$1" in
     update-diff) eval_in_client "$(update_diff)" ;;
+    update-diff-via-git) eval_in_client "$(update_diff _via_git)" ;;
     *)
         printf "fail unknown git-async command '%s'\n" "$1"
         exit
