@@ -14,16 +14,16 @@ hook global -group git-gutter-hooks BufCreate .* %{
   try %{ git show-diff }
 }
 hook global -group git-gutter-hooks FocusIn .* %{
-  try %{ git-async update-diff }
+  try %{ git update-diff }
 }
 hook global -group git-gutter-hooks BufReload .* %{
-  try %{ git-async update-diff }
+  try %{ git update-diff }
 }
 hook global -group git-gutter-hooks BufWritePost .* %{
-  try %{ git-async update-diff }
+  try %{ git update-diff }
 }
 hook global -group git-gutter-hooks NormalIdle .* %{
-  try %{ git-async update-diff }
+  try %{ git update-diff }
 }
 ```
 
@@ -45,16 +45,16 @@ hook global -group git-gutter-hooks BufCreate .* %{
   try %{ git show-diff }
 }
 hook global -group git-gutter-hooks FocusIn .* %{
-  try %{ git update-diff }
+  try %{ git-async update-diff }
 }
 hook global -group git-gutter-hooks BufReload .* %{
-  try %{ git update-diff }
+  try %{ git-async update-diff }
 }
 hook global -group git-gutter-hooks BufWritePost .* %{
-  try %{ git update-diff }
+  try %{ git-async update-diff }
 }
 hook global -group git-gutter-hooks NormalIdle .* %{
-  try %{ git update-diff }
+  try %{ git-async update-diff }
 }
 ```
 
